@@ -26,6 +26,7 @@
             //destructor
             ~Stack();
 
+            StackFramePtr gettop();
             void push(char the_symbol);
             char pop( );
             char reverse( );
