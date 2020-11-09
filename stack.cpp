@@ -5,16 +5,17 @@ using namespace std;
 
 namespace ENSC251_lab4
 {
-//************************************************************************************************************************************
 
-Stack::Stack() : top(nullptr) //default constructor
+//************************************************************************************************************************************
+template <class c>
+Stack<c>::Stack() : top(nullptr) //default constructor
     {
     
     } 
 
 //************************************************************************************************************************************
-
-Stack::Stack(const Stack& a_stack) //copy constructor, uses cstddef
+template <class c>
+Stack<c>::Stack(const Stack& a_stack) //copy constructor, uses cstddef
     {
         if(a_stack.top == nullptr)
             {
@@ -44,8 +45,8 @@ Stack::Stack(const Stack& a_stack) //copy constructor, uses cstddef
     }
 
 //************************************************************************************************************************************
-
-Stack::~Stack() //destructor
+template <class c>
+Stack<c>::~Stack() //destructor
     {
         char next;
         while(!empty()) //if the stack is not empty then only will it remove anything
@@ -57,14 +58,15 @@ Stack::~Stack() //destructor
 
 //************************************************************************************************************************************
 
-StackFramePtr Stack::gettop()
+template <class c>
+StackFramePtr Stack<c>::gettop()
 {
     return top;
 }
 
 //******************************************************** PUSH *************************************************************************
-
-void Stack::push(char the_symbol)
+template <class c>
+void Stack<c>::push(c the_symbol)
     {
         StackFramePtr temp;
         temp = new StackFrame;
@@ -75,8 +77,8 @@ void Stack::push(char the_symbol)
     }
 
 //********************************************************* POP *************************************************************************
-
-char Stack::pop() // uses iostream
+template <class c>
+char Stack<c>::pop() // uses iostream
 {
     if(empty()) // corner case
     {
@@ -84,9 +86,9 @@ char Stack::pop() // uses iostream
         exit(1);
     }
 
-    char result = top->data;
+    c result = top->data;
 
-    StackFramePtr temp;
+    StackFramePtr temp; // WHERE DOES POPPING GO
     temp = top;
     top = top->link;
 
@@ -97,15 +99,15 @@ char Stack::pop() // uses iostream
 
 
 //******************************************************** REVERSE **********************************************************************
-
-char Stack::reverse()
+template <class c>
+char Stack<c>::reverse()
 {
 
 }
 
 //********************************************************* EMPTY ***********************************************************************
-
-bool Stack::empty() const  //uses cstddef
+template <class c>
+bool Stack<c>::empty() const  //uses cstddef
 {
     return (top == nullptr);
 }
