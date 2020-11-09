@@ -97,7 +97,6 @@ char Stack<c>::pop() // uses iostream
     return result;
 }
 
-}
 //******************************************************** REVERSE **********************************************************************
 template <class c>
 char Stack<c>::reverse()
@@ -117,3 +116,4 @@ bool Stack<c>::empty() const  //uses cstddef
 
 
 }
+
