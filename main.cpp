@@ -1,7 +1,13 @@
 #include "stack.hpp"
-
 #include <iostream>
-//Gurnek was here
-// Avash was here
 
-// another test
+
+int main()
+{
+
+
+
+
+
+    return 0;
+}
