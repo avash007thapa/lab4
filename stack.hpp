@@ -14,6 +14,7 @@
         };
     typedef StackFrame* StackFramePtr;
 
+    template <class c>
     class Stack 
     {
         public:
@@ -27,7 +28,7 @@
             ~Stack();
 
             StackFramePtr gettop();
-            void push(char the_symbol);
+            void push(c the_symbol);
             char pop( );
             char reverse( );
             bool empty( ) const;

@@ -2,12 +2,10 @@
 #include <iostream>
 
 
-int main()
-{
+//Testing Merge file
 
-
-
-
+int main {
 
     return 0;
 }
+// another test
