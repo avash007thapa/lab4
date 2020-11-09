@@ -56,7 +56,7 @@ Stack<c>::~Stack() //destructor
 
     }
 
-//***************************************************************************************************************************************
+//************************************************************************************************************************************
 
 template <class c>
 StackFramePtr Stack<c>::gettop()
@@ -82,11 +82,9 @@ char Stack<c>::pop() // uses iostream
 {
     if(empty()) // corner case
     {
-        if(empty()) // corner case
-        {
-            cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
-            exit(1);
-        }
+        cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
+        exit(1);
+    }
 
     c result = top->data;
 
@@ -94,12 +92,11 @@ char Stack<c>::pop() // uses iostream
     temp = top;
     top = top->link;
 
-        delete temp;
+    delete temp;
 
-        return result;
-    }
-
+    return result;
 }
+
 //******************************************************** REVERSE **********************************************************************
 template <class c>
 char Stack<c>::reverse()
@@ -107,22 +104,7 @@ char Stack<c>::reverse()
 
 //---------------------------------------------------------------------------------------------------------------------------------------
 
-char Stack::insBottom(char the_symbol)
-    {
-        string ns;
-            if(empty())
-            {
-                push(the_symbol);
-            }
-            else
-            {
-                char a = top->data;
-                pop();
-                insBottom(the_symbol);
-                push(a);
-            }
-            
-    }
+}
 
 //********************************************************* EMPTY ***********************************************************************
 template <class c>
@@ -134,3 +116,4 @@ bool Stack<c>::empty() const  //uses cstddef
 
 
 }
+

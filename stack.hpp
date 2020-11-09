@@ -31,7 +31,6 @@
             void push(c the_symbol);
             char pop( );
             char reverse( );
-            char insBottom(char the_symbol);
             bool empty( ) const;
 
             // friend ostream &operator=(ostream &out, Stack &stackPtr);
