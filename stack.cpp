@@ -43,7 +43,7 @@ Stack::Stack(const Stack& a_stack) //copy constructor, uses cstddef
         
     }
 
-//************************************************************************************************************************************
+//**************************************************************************************************************************************
 
 Stack::~Stack() //destructor
     {
@@ -55,12 +55,12 @@ Stack::~Stack() //destructor
 
     }
 
-//************************************************************************************************************************************
+//***************************************************************************************************************************************
 
 StackFramePtr Stack::gettop()
-{
-    return top;
-}
+    {
+        return top;
+    }
 
 //******************************************************** PUSH *************************************************************************
 
@@ -77,38 +77,63 @@ void Stack::push(char the_symbol)
 //********************************************************* POP *************************************************************************
 
 char Stack::pop() // uses iostream
-{
-    if(empty()) // corner case
     {
-        cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
-        exit(1);
+        if(empty()) // corner case
+        {
+            cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
+            exit(1);
+        }
+
+        char result = top->data;
+
+        StackFramePtr temp;
+        temp = top;
+        top = top->link;
+
+        delete temp;
+
+        return result;
     }
-
-    char result = top->data;
-
-    StackFramePtr temp;
-    temp = top;
-    top = top->link;
-
-    delete temp;
-
-    return result;
-}
 
 
 //******************************************************** REVERSE **********************************************************************
 
 char Stack::reverse()
-{
+    {
+        if(!empty())
+        {
+            char b = top->data;
+            pop();
+            reverse();
+            insBottom(b);
+        }
+    }
 
-}
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+char Stack::insBottom(char the_symbol)
+    {
+        string ns;
+            if(empty())
+            {
+                push(the_symbol);
+            }
+            else
+            {
+                char a = top->data;
+                pop();
+                insBottom(the_symbol);
+                push(a);
+            }
+            
+    }
 
 //********************************************************* EMPTY ***********************************************************************
 
 bool Stack::empty() const  //uses cstddef
-{
-    return (top == nullptr);
-}
+    {
+        return (top == nullptr);
+    }
 
 
 
