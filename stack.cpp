@@ -44,7 +44,7 @@ Stack<c>::Stack(const Stack& a_stack) //copy constructor, uses cstddef
         
     }
 
-//************************************************************************************************************************************
+//**************************************************************************************************************************************
 template <class c>
 Stack<c>::~Stack() //destructor
     {
@@ -56,13 +56,13 @@ Stack<c>::~Stack() //destructor
 
     }
 
-//************************************************************************************************************************************
+//**************************************************************************************************************************************
 
 template <class c>
 StackFramePtr Stack<c>::gettop()
-{
-    return top;
-}
+    {
+        return top;
+    }
 
 //******************************************************** PUSH *************************************************************************
 template <class c>
@@ -78,40 +78,66 @@ void Stack<c>::push(c the_symbol)
 
 //********************************************************* POP *************************************************************************
 template <class c>
-char Stack<c>::pop() // uses iostream
-{
-    if(empty()) // corner case
+c Stack<c>::pop() // uses iostream
     {
-        cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
-        exit(1);
+        if(empty()) // corner case
+        {
+            cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
+            exit(1);
+        }
+
+        c result = top->data;
+
+        StackFramePtr temp; // WHERE DOES POPPING GO
+        temp = top;
+        top = top->link;
+
+        delete temp;
+
+        return result;
     }
-
-    c result = top->data;
-
-    StackFramePtr temp; // WHERE DOES POPPING GO
-    temp = top;
-    top = top->link;
-
-    delete temp;
-
-    return result;
-}
 
 //******************************************************** REVERSE **********************************************************************
 template <class c>
-char Stack<c>::reverse()
-{
-
+c Stack<c>::reverse()
+    {
+        if(!empty())
+        {
+            c b = top->data;
+            pop();
+            reverse();
+            insBottom(b);
+        }
+        else
+        {
+            cout<<"This Stack is now empty \n";
+        }
+        
+    }
 //---------------------------------------------------------------------------------------------------------------------------------------
-
-}
+template <class c>
+c Stack<c>::insBottom(c the_symbol)
+    {
+        string ns;
+                if(empty())
+                {
+                    push(the_symbol);
+                }
+                else
+                {
+                    c a = top->data;
+                    pop();
+                    insBottom(the_symbol);
+                    push(a);
+                }
+    }
 
 //********************************************************* EMPTY ***********************************************************************
 template <class c>
 bool Stack<c>::empty() const  //uses cstddef
-{
-    return (top == nullptr);
-}
+    {
+        return (top == nullptr);
+    }
 
 
 

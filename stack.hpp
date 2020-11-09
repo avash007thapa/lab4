@@ -29,8 +29,9 @@
 
             StackFramePtr gettop();
             void push(c the_symbol);
-            char pop( );
-            char reverse( );
+            c pop( );
+            c reverse( );
+            c insBottom(c the_symbol);
             bool empty( ) const;
 
             // friend ostream &operator=(ostream &out, Stack &stackPtr);
