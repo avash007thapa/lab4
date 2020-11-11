@@ -1,25 +1,29 @@
 // driver code belongs here
 
 #include <iostream>
-using namespace ENSC251_lab4;
-using namespace std;
+#include "stack.hpp"
 
-void printStack(Stack<int> s)
+using namespace ENSC251_lab4;
+//using namespace std;
+
+void printStack(Stack& s)
 {
-    if(s.empty())
+    cout << "This is Print Stack \n";
+    if(!s.empty())
     {
         int x = s.gettop()->data;
         s.pop();
-        cout << x << "\n";
+        std::cout << x << "\n";
         printStack(s);
         s.push(x);
+        
     }
 }
 
 int main()
 {
-    Stack<int> s;
-    Stack<int> sint1;
+    Stack s;
+    Stack sint1;
     
    // Stack<int> sint2;
     sint1.push(1);
