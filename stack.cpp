@@ -1,18 +1,15 @@
 #include <iostream>
 #include <cstddef>
 #include "stack.hpp"
-
-
-namespace ENSC251_lab4
-{
+using namespace std;
 
 //************************************************************************************************************************************
-    //template <class c>
-    Stack::Stack() : top(nullptr) {   } //default constructor
+    template <class c>
+    Stack<c>::Stack() : top(nullptr) {   } //default constructor
 
 //************************************************************************************************************************************
-    //template <class c>
-    Stack::Stack(const Stack& a_stack) //copy constructor, uses cstddef
+    template <class c>
+    Stack<c>::Stack(const Stack& a_stack) //copy constructor, uses cstddef
     {
         if(a_stack.top == nullptr) {
             top = nullptr;
@@ -37,8 +34,8 @@ namespace ENSC251_lab4
     }
 
 //**************************************************************************************************************************************
-    //template <class c>
-    Stack::~Stack(){     //destructor
+    template <class c>
+    Stack<c>::~Stack(){     //destructor
         char next;
         while(!empty()) //if the stack is not empty then only will it remove anything
         {
@@ -49,32 +46,35 @@ namespace ENSC251_lab4
 
 //**************************************************************************************************************************************
 
-   // template <class c>
-    StackFramePtr Stack::gettop(){
+   template <class c>
+   StackFramePtr Stack<c>::gettop()
+        {
             return top;
         }
 
 //******************************************************** PUSH *************************************************************************
-    //template <class c>
-    void Stack::push(int the_symbol){
+    template <class c>
+    void Stack<c>::push(char the_symbol){
         StackFramePtr temp;
         temp = new StackFrame;
 
         temp->data = the_symbol;
         temp->link = top;
         top = temp;
+        cout << "Pushing " << the_symbol << endl;
     }
 
 //********************************************************* POP *************************************************************************
-    //template <class c>
-    int Stack::pop(){      //
+    template <class c>
+    c Stack<c>::pop()
+    {      
         if(empty()) // corner case
         {
             cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
             exit(1);
         }
 
-        int result = top->data;
+        char result = top->data;
 
         StackFramePtr temp; // WHERE DOES POPPING GO
         temp = top;
@@ -86,10 +86,10 @@ namespace ENSC251_lab4
     }
 
 //******************************************************** REVERSE **********************************************************************
-    //template <class c>
-    void Stack::reverse(){
+    template <class c>
+    void Stack<c>::reverse(){
         if(!empty()){
-            int b = top->data;
+            char b = top->data;
             pop();
             reverse();
             insBottom(b);
@@ -101,14 +101,14 @@ namespace ENSC251_lab4
     }
 
 //********************************************************* EMPTY ***********************************************************************
-    //template <class c>
-    void Stack::insBottom(int the_symbol){
+    template <class c>
+    void Stack<c>::insBottom(char the_symbol){
         string ns;
         if(empty()){
             push(the_symbol);
         }
         else{
-            int a = top->data;
+            char a = top->data;
             pop();
             insBottom(the_symbol);
             push(a);
@@ -116,12 +116,11 @@ namespace ENSC251_lab4
     }
 
 //********************************************************* EMPTY ***********************************************************************
-    //template <class c>
-    bool Stack::empty() const{       //uses cstddef
+    template <class c>
+    bool Stack<c>::empty() const{       //uses cstddef
         return (top == nullptr);
     }
 
 
 
-}
 

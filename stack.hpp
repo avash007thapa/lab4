@@ -1,21 +1,18 @@
- //#ifndef STACK_H
- //#define STACK_H
- 
- 
- #include <iostream>
-
- 
- namespace ENSC251_lab4
- { 
-    using namespace std;
+#ifndef STACK_H
+#define STACK_H
+#include <iostream>
+using namespace std;
+    
+    template<class c>
     struct StackFrame   //creating a node "StackFrame"
     {
-        char data;
-        StackFrame *link;
+        c data;
+        StackFrame<c> *link;
     };
-    typedef StackFrame* StackFramePtr;
+    template<class c>
+    typedef StackFrame<c>* StackFramePtr;
 
-    //template <class c>
+    template <class c>
     class Stack 
     {
         public:
@@ -29,10 +26,10 @@
             ~Stack();
 
             StackFramePtr gettop();
-            void push(int the_symbol);
-            int pop( );
+            void push(char the_symbol);
+            c pop( );
             void reverse( );
-            void insBottom(int the_symbol);
+            void insBottom(char the_symbol);
             bool empty( ) const;
 
             // friend ostream &operator=(ostream &out, Stack &stackPtr);
@@ -40,6 +37,5 @@
         private:
             StackFramePtr top;
     };
- }
 
- //#endif STACK_H
+#endif STACK_H
