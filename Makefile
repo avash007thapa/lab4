@@ -19,6 +19,6 @@ stack.o: stack.cpp
 
 #remove built files
 clean:
-	del -rf main main.o stack.o *~
+	del -rf main.exe main.o stack.o *~
 
-# change del to rm
+# change del to rm and main.exe to main

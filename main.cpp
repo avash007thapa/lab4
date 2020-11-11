@@ -3,7 +3,6 @@
 #include <iostream>
 #include "stack.hpp"
 
-using namespace ENSC251_lab4;
 //using namespace std;
 
 void printStack(Stack& s)
