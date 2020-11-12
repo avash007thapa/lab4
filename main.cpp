@@ -2,16 +2,15 @@
 
 #include <iostream>
 #include "stack.hpp"
-#include "stack.cpp"
 using namespace std;
 
-template<class c>
-void printStack(Stack<c> s)
+template<class T>
+void printStack(Stack<T> s)
 {
-    cout << "This is Print Stack \n";
+    
     if(!s.empty())
     {
-        char x = s.gettop()->data;
+        T x = s.gettop()->data;
         s.pop();
         std::cout << x << "\n";
         printStack(s);
@@ -24,6 +23,7 @@ int main()
 {
     Stack<int> s;
     Stack<int> sint1;
+    //Stack<int> sint2;
     
    // Stack<int> sint2;
     sint1.push(1);
@@ -32,8 +32,15 @@ int main()
     sint1.push(4);
     sint1.push(5);
     sint1.push(6);
-    sint1.reverse();
+    sint1.pop();
+    //Stack<int> sint2(sint1);
 
-    printStack(s);
+    printStack(sint1);
+    // printStack(sint2);
+
+    // sint2.reverse();
+
+    // printStack(sint1);
+    // printStack(sint2);
     return 0;
 }
