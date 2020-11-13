@@ -54,8 +54,9 @@ int main()
     int menu = -1;
 
     while(!(menu == 0)) {
-        cout<<"\n0-Exit code \n 1-Palindrome \n 2-Double stuff\n 3- \n";
+        cout<<"\n\n 0-Exit code \n 1-Palindrome \n 2-Double stuff\n 3-Int stuff \n";
         cin>>menu;
+
 
 //******************************************************************** 4(c) *****************************************************
         if (menu == 1) {
@@ -80,11 +81,28 @@ int main()
             cout<< "\nThis is sdouble2: \n";
             printStack(sdouble2);    
         }
-    }
     
-//******************************************************************** 4(b) *****************************************************
     
+//******************************************************************** 4(a) *****************************************************
+        else if (menu == 3)
+        {
+            sint1.push(1);
+            sint1.push(2);
+            sint1.push(3);
+            sint1.push(4);
+            sint1.push(5);
+            sint1.push(6);
+            
+            sint2 = sint1;
+            sint2.reverse();
 
+            cout << "\nThis is sint1: \n";
+            printStack(sint1);
+            cout << "\nThis is sint2: \n";
+            printStack(sint2);
+
+        }
+    }
 
 
    // Stack<int> sint2;

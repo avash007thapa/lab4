@@ -139,7 +139,35 @@ using namespace std;
 
 //********************************************************* EMPTY ***********************************************************************
 
+    template <class T>
+    const Stack<T> &Stack<T>::operator=(const Stack<T>& a_stack)
+    {
+        cout << "Assignment running\n";
+        if(a_stack.top == nullptr) 
+                {
+                    top = nullptr;
+                }
+                else 
+                {
+                    StackFramePtr<T> temp = a_stack.top;
+                    StackFramePtr<T> end;
 
+                    end = new StackFrame<T>;
+                    end->data = temp->data;
+                    top = end;
+
+                    temp = temp->link;
+                    while (temp != nullptr) 
+                    {
+                    end->link = new StackFrame<T>;
+                    end = end->link;
+                    end->data = temp->data;
+                    temp = temp->link;
+                    }
+                 end->link = nullptr; 
+                }          
+        return *this;
+    }
 
 
 

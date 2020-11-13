@@ -48,8 +48,8 @@ using namespace std;
 
             bool empty( ) const;
 
-            // friend ostream &operator=(ostream &out, Stack &stackPtr);
-    
+            const Stack<T>& operator= (const Stack<T>& a_stack);
+
         private:
             StackFramePtr<T> top;
     };
