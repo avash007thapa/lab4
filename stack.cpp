@@ -92,19 +92,22 @@ using namespace std;
 
 //******************************************************** REVERSE ***************************************************************
     template <class T>
-    void Stack<T>::reverse()
+    void Stack<T>::reverse() // everything runs on N iterations
     {
-                 if(!empty()) // ! operator- N cases
-                    {
-                        T b = pop(); // = operator- runs N times
-                        // pops the top element. how do you count this. 
-                        // Runs 3N times 
-                       
-                        reverse(); // Runs 
-                        insBottom(b);
-                        
-                    }
-            }
+        if(!empty()) // ! operator- N cases
+        {
+            T b = pop(); // = operator- runs N times
+            // pops the top element. how do you count this. 
+            // Runs 3N times -- but ignore the coefficient
+            
+            reverse(); // recursion works 
+            insBottom(b); // runs an additional N times on top of the recursive reverse function (N*N)
+            
+        }
+    
+    }
+
+    // Therefore, this piece of code has the worst time complexity of O(N^2) 
 
 //********************************************************** HELPER FUNCTION FOR REVERSE *****************************************
     template <class T>
