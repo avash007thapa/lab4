@@ -2,6 +2,7 @@
 #define STACK_H
 #include <iostream>
 #include <cstddef>
+#include <string>
 using namespace std;
     
     template<class T>
@@ -39,12 +40,12 @@ using namespace std;
 
                     temp = temp->link;
                     while (temp != nullptr) 
-                     {
-                        end->link = new StackFrame<T>;
-                        end = end->link;
-                        end->data = temp->data;
-                        temp = temp->link;
-                     }
+                    {
+                    end->link = new StackFrame<T>;
+                    end = end->link;
+                    end->data = temp->data;
+                    temp = temp->link;
+                    }
                  end->link = nullptr;
                 }
             }
@@ -72,11 +73,11 @@ using namespace std;
                     temp->data = the_symbol;
                     temp->link = top;
                     top = temp;
-                   // cout << "Pushing " << top->data << endl;
+                    //cout << "Pushing " << top->data << endl;
                 }
 
 
-            T pop( )
+            T pop( ) // worst case not empty: 
                 {
                     if(empty()) // corner case
                     {
@@ -85,35 +86,36 @@ using namespace std;
                     }
 
                     T result;
-                    result = top->data;
+                    result = top->data; 
 
                     StackFramePtr temp; // declares temporary variable of StackFramePtr
                     temp = top; // saves the value of current top
                     top = top->link; //changes current top to the next item in the stack
                     
-                    
+                    // = operator 3N times
 
                     delete temp; //deletes the top value saved in temp (deletes old top)
 
-                   // cout<<"Popped " << result << "\n";
-
+                    //cout << "popped " << result << endl;
                     return result;
                 }
 
 
-            void reverse()
+            void reverse() // assuming N elements in Stack
             {
-                 if(!empty())
+                 if(!empty()) // ! operator- N cases
                     {
-                        T b = top->data;
-                        pop();
-                        reverse();
+                        T b = top->data; // = operator- runs N times
+                        pop(); // pops the top element. how do you count this. 
+                        // Runs 3N times 
+                       
+                        reverse(); // Runs 
                         insBottom(b);
                         
                     }
                     else
                     {
-                        cout<<"This Stack is now empty \n";
+                        //cout<<"This Stack is now empty \n";
                     }
 
                     //cout << "Stack has been reversed. \n";
