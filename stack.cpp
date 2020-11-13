@@ -96,20 +96,14 @@ using namespace std;
     {
                  if(!empty()) // ! operator- N cases
                     {
-                        T b = top->data; // = operator- runs N times
-                        pop(); // pops the top element. how do you count this. 
+                        T b = pop(); // = operator- runs N times
+                        // pops the top element. how do you count this. 
                         // Runs 3N times 
                        
                         reverse(); // Runs 
                         insBottom(b);
                         
                     }
-                    else
-                    {
-                        //cout<<"This Stack is now empty \n";
-                    }
-
-                    //cout << "Stack has been reversed. \n";
             }
 
 //********************************************************** HELPER FUNCTION FOR REVERSE *****************************************

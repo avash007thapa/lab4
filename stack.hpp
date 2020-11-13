@@ -1,5 +1,6 @@
 #ifndef STACK_H
 #define STACK_H
+
 #include <iostream>
 #include <cstddef>
 #include <string>
@@ -41,8 +42,6 @@ using namespace std;
 
 
             void reverse(); // assuming N elements in Stack
-            
-
             void insBottom(T the_symbol);
 
 
