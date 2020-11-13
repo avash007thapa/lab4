@@ -1,120 +1,144 @@
-// #include <iostream>
-// #include <cstddef>
-// #include "stack.hpp"
-// using namespace std;
+#include <iostream>
+#include <cstddef>
+#include <string>
+#include "stack.hpp"
+using namespace std;
 
-// //************************************************************************************************************************************
-//     template <class c>
-//     Stack<c>::Stack() : top(nullptr) {   } //default constructor
+//************************************************************************************************************************************
+    template <class T>
+    Stack<T>::Stack() : top(nullptr) {   } //default constructor
 
-// //************************************************************************************************************************************
-//     template <class c>
-//     Stack<c>::Stack(const Stack& a_stack) //copy constructor, uses cstddef
-//     {
-//         if(a_stack.top == nullptr) {
-//             top = nullptr;
-//         }
-//         else {
-//             StackFramePtr temp = a_stack.top;
-//             StackFramePtr end;
+//************************************************************************************************************************************
+    template <class T>
+    Stack<T>::Stack(const Stack<T>& a_stack) //copy constructor, uses cstddef
+    {
+        if(a_stack.top == nullptr) 
+                {
+                    top = nullptr;
+                }
+                else 
+                {
+                    StackFramePtr<T> temp = a_stack.top;
+                    StackFramePtr<T> end;
 
-//             end = new StackFrame;
-//             end->data = temp->data;
-//             top = end;
+                    end = new StackFrame<T>;
+                    end->data = temp->data;
+                    top = end;
 
-//             temp = temp->link;
-//             while (temp != nullptr) {
-//                 end->link = new StackFrame;
-//                 end = end->link;
-//                 end->data = temp->data;
-//                 temp = temp->link;
-//             }
-//             end->link = nullptr;
-//         }
-//     }
+                    temp = temp->link;
+                    while (temp != nullptr) 
+                    {
+                    end->link = new StackFrame<T>;
+                    end = end->link;
+                    end->data = temp->data;
+                    temp = temp->link;
+                    }
+                 end->link = nullptr;
+                }
+    }
 
-// //**************************************************************************************************************************************
-//     template <class c>
-//     Stack<c>::~Stack(){     //destructor
-//         char next;
-//         while(!empty()) //if the stack is not empty then only will it remove anything
-//         {
-//             next = pop(); //calling pop function to remove item.
-//         }
+//**************************************************************************************************************************************
+    template <class T>
+    Stack<T>::~Stack()
+    {
+                T next;
+                while(!empty()) //if the stack is not empty then only will it remove anything
+                {
+                    next = pop(); //calling pop function to remove item.
+                }
+            }
 
-//     }
+//**************************************************************************************************************************************
+    template <class T>
+    StackFramePtr<T> Stack<T>::gettop() const{
+                return top;
+            }
 
-// //******************************************************** PUSH *************************************************************************
-//     template <class c>
-//     void Stack<c>::push(char the_symbol){
-//         StackFramePtr temp;
-//         temp = new StackFrame;
+//******************************************************** PUSH *************************************************************************
+    template <class T>
+    void Stack<T>::push(T the_symbol){
+                    StackFramePtr<T> temp = new StackFrame<T>;
 
-//         temp->data = the_symbol;
-//         temp->link = top;
-//         top = temp;
-//         cout << "Pushing " << the_symbol << endl;
-//     }
+                    temp->data = the_symbol;
+                    temp->link = top;
+                    top = temp;
+                    //cout << "Pushing " << top->data << endl;
+                }
 
-// //********************************************************* POP *************************************************************************
-//     template <class c>
-//     c Stack<c>::pop()
-//     {      
-//         if(empty()) // corner case
-//         {
-//             cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
-//             exit(1);
-//         }
+//********************************************************* POP *************************************************************************
+    template <class T>
+    T Stack<T>::pop()
+    {
+                    if(empty()) // corner case
+                    {
+                        cout << "The Stack is already empty! Cannot Pop an Empty Stack. \n";
+                        exit(1);
+                    }
 
-//         char result = top->data;
+                    T result;
+                    result = top->data; 
 
-//         StackFramePtr temp; // WHERE DOES POPPING GO
-//         temp = top;
-//         top = top->link;
+                    StackFramePtr<T> temp; // declares temporary variable of StackFramePtr
+                    temp = top; // saves the value of current top
+                    top = top->link; //changes current top to the next item in the stack
+                    
+                    // = operator 3N times
 
-//         delete temp;
+                    delete temp; //deletes the top value saved in temp (deletes old top)
 
-//         return result;
-//     }
+                    //cout << "popped " << result << endl;
+                    return result;
+                }
 
-// //******************************************************** REVERSE **********************************************************************
-//     template <class c>
-//     void Stack<c>::reverse(){
-//         if(!empty()){
-//             char b = top->data;
-//             pop();
-//             reverse();
-//             insBottom(b);
-//         }
-//         else{
-//             cout<<"This Stack is now empty \n";
-//         }
-        
-//     }
+//******************************************************** REVERSE ***************************************************************
+    template <class T>
+    void Stack<T>::reverse()
+    {
+                 if(!empty()) // ! operator- N cases
+                    {
+                        T b = top->data; // = operator- runs N times
+                        pop(); // pops the top element. how do you count this. 
+                        // Runs 3N times 
+                       
+                        reverse(); // Runs 
+                        insBottom(b);
+                        
+                    }
+                    else
+                    {
+                        //cout<<"This Stack is now empty \n";
+                    }
 
-// //********************************************************************************************************************************
-//     template <class c>
-//     void Stack<c>::insBottom(char the_symbol){
-//         string ns;
-//         if(empty()){
-//             push(the_symbol);
-//         }
-//         else{
-//             char a = top->data;
-//             pop();
-//             insBottom(the_symbol);
-//             push(a);
-//         }
-//     }
+                    //cout << "Stack has been reversed. \n";
+            }
 
-// //********************************************************* EMPTY ***********************************************************************
-//     template <class c>
-//     bool Stack<c>::empty() const{       //uses cstddef
-//         return (top == nullptr);
-//     }
+//********************************************************** HELPER FUNCTION FOR REVERSE *****************************************
+    template <class T>
+    void Stack<T>::insBottom(T the_symbol)
+    {
+        //string ns;
+        if(empty())
+        {
+            push(the_symbol);
+        }
+        else
+        {
+            T a = top->data;
+            pop();
+            insBottom(the_symbol);
+            push(a);
+        }
+    }
+
+//********************************************************* EMPTY ****************************************************************
+    template <class T>
+    bool Stack<T>::empty() const       //uses cstddef
+    {
+        return (top == nullptr);
+    }
 
 //********************************************************* EMPTY ***********************************************************************
-//template <class c>
+
 
 
 
