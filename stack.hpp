@@ -32,7 +32,7 @@ using namespace std;
             //destructor
             ~Stack();
 
-            StackFramePtr<T> gettop() const;
+            StackFramePtr<T> getTop() const;
 
 
             void push(T the_symbol);
