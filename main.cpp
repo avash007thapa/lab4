@@ -7,9 +7,9 @@
 using namespace std;
 
 template<class T>
-void printStack(Stack<T> s)
+void printStack(Stack<T> s) // This is an ordinary PrintStack function. Does not change the Data in the stack
 {
-    if(s.empty())
+    if(s.empty()) // uses the empty() member function to check
     cout << "This stack is empty.\n";
 
     else if(!s.empty())
@@ -26,13 +26,13 @@ void printStack(Stack<T> s)
 
 
 template<class T>
-void palindrome(Stack<T> s){
+void palindrome(Stack<T> s){        // Palindrome ordinary function used by main to get a string and print out its palindrome
     
     string myStr;
 
     cout<<"\nenter an input:  ";
         cin.get();
-        getline(cin,myStr);
+        getline(cin,myStr);     //string library function for input 
 
         for(int i = 0; i < myStr.length(); i++) {
             s.push(myStr[i]);
@@ -46,7 +46,7 @@ void palindrome(Stack<T> s){
 }
 
 template<class T>
-void doubleStack(Stack<T> sdouble1){
+void doubleStack(Stack<T> sdouble1){    //doubleStack function helps main set and perform operations on the two Double stacks
     int doubleMenu =-1;
     sdouble1.push(1.5);
     sdouble1.push(2.5);
@@ -55,7 +55,7 @@ void doubleStack(Stack<T> sdouble1){
     sdouble1.push(5.5);
     sdouble1.push(6.5);
 
-    Stack<double> sdouble2(sdouble1);
+    Stack<double> sdouble2(sdouble1);   //uses copy constructor
     sdouble2.reverse();
 
     while(doubleMenu != 0) {
@@ -85,7 +85,7 @@ void doubleStack(Stack<T> sdouble1){
 }
 
 template<class T>
-void intStack(Stack<T> sint1){
+void intStack(Stack<T> sint1){      //intStack function helps main set and perform operations on the two Double stacks
     int intMenu =-1;
     
     sint1.push(1);
@@ -96,7 +96,7 @@ void intStack(Stack<T> sint1){
     sint1.push(6);
 
     Stack<int> sint2;
-    sint2 = sint1;
+    sint2 = sint1;          //assignment operator that uses deep copy to copy the contents of sint1 to sint2 
     sint2.reverse();
 
     while(intMenu != 0) {
@@ -162,8 +162,5 @@ int main()
     }
 
     return 0;
-
-
-
     
 }
