@@ -13,58 +13,67 @@ using namespace std;
     template <class T>
     Stack<T>::Stack(const Stack<T>& a_stack) //copy constructor, uses cstddef
     {
-        if(a_stack.top == nullptr) 
-                {
-                    top = nullptr; //initializing top to nullptr if a_stack.top is also nullptr
-                }
-                else 
-                {
-                    StackFramePtr<T> temp = a_stack.top; // storing a_stack top into temporary variable which moves through a_stack from top to bottom
-                    StackFramePtr<T> end; // declaring end of the newly created stack
+        try{
+            if(a_stack.top == nullptr) {
+                top = nullptr; //initializing top to nullptr if a_stack.top is also nullptr
+            }
+            else {
+                StackFramePtr<T> temp = a_stack.top; // storing a_stack top into temporary variable which moves through a_stack from top to bottom
+                StackFramePtr<T> end; // declaring end of the newly created stack
 
-                    end = new StackFrame<T>;  //creates the first node and copies data from original stack then creates rest of the nodes after.
-                    end->data = temp->data;
-                    top = end;
+                end = new StackFrame<T>;  //creates the first node and copies data from original stack then creates rest of the nodes after.
+                end->data = temp->data;
+                top = end;
 
-                    temp = temp->link; //sets temp to next node in the a_stack
-                    while (temp != nullptr) 
-                    {
-                    end->link = new StackFrame<T>;   //creating rest of the nodes
-                    end = end->link;
-                    end->data = temp->data;
-                    temp = temp->link;
-                    }
-                 end->link = nullptr; //making sure that there is nothing after the end node.
+                temp = temp->link; //sets temp to next node in the a_stack
+                while (temp != nullptr) 
+                {
+                end->link = new StackFrame<T>;   //creating rest of the nodes
+                end = end->link;
+                end->data = temp->data;
+                temp = temp->link;
                 }
+                end->link = nullptr; //making sure that there is nothing after the end node.
+            }
+        }
+        catch(bad_alloc) {
+            cout<<"Bad memory allocation\n";
+            exit(1);
+        }    
     }
 
 //******************************************************** DESTRUCTOR *****************************************************************
     template <class T>
     Stack<T>::~Stack()
     {
-                T next;
-                while(!empty()) //if the stack is not empty then only will it remove anything
-                {
-                    next = pop(); //calling pop function to remove next item.
-                }
-            }
+        T next;
+        while(!empty()) //if the stack is not empty then only will it remove anything
+        {
+            next = pop(); //calling pop function to remove next item.
+        }
+    }
 
 //********************************************************* GET TOP ********************************************************************
     template <class T>
     StackFramePtr<T> Stack<T>::getTop() const{ //accessing 'top' private member variable
-                return top;
-            }
+        return top;
+    }
 
 //********************************************************** PUSH **********************************************************************
     template <class T>
     void Stack<T>::push(T the_symbol){
-                    StackFramePtr<T> temp = new StackFrame<T>; //creates new node stored in temp
+        try{
+            StackFramePtr<T> temp = new StackFrame<T>; //creates new node stored in temp
 
-                    temp->data = the_symbol; // data of the_symbol is stored into data of temp
-                    temp->link = top; // setting top to the now be the next node (under this new node)
-                    top = temp;  // temp is now the new top value
-                    
-                }
+            temp->data = the_symbol; // data of the_symbol is stored into data of temp
+            temp->link = top; // setting top to the now be the next node (under this new node)
+            top = temp;  // temp is now the new top value
+        }
+        catch(bad_alloc) {
+            cout<<"Bad memory allocation\n";
+            exit(1);
+        }
+    }
 
 //********************************************************** POP ************************************************************************
     template <class T>
@@ -144,31 +153,37 @@ using namespace std;
     template <class T>
     const Stack<T> &Stack<T>::operator=(const Stack<T>& a_stack)  // see copy constructor(same code)
     {
-        cout << "Assignment running\n";
-        if(a_stack.top == nullptr) 
-                {
-                    top = nullptr;
-                }
-                else 
-                {
-                    StackFramePtr<T> temp = a_stack.top;
-                    StackFramePtr<T> end;
-
-                    end = new StackFrame<T>;
-                    end->data = temp->data;
-                    top = end;
-
-                    temp = temp->link;
-                    while (temp != nullptr) 
+        try{
+            cout << "Assignment running\n";
+            if(a_stack.top == nullptr) 
                     {
-                    end->link = new StackFrame<T>;
-                    end = end->link;
-                    end->data = temp->data;
-                    temp = temp->link;
+                        top = nullptr;
                     }
-                 end->link = nullptr; 
-                }          
-        return *this; // dereferences &a_stack
+                    else 
+                    {
+                        StackFramePtr<T> temp = a_stack.top;
+                        StackFramePtr<T> end;
+
+                        end = new StackFrame<T>;
+                        end->data = temp->data;
+                        top = end;
+
+                        temp = temp->link;
+                        while (temp != nullptr) 
+                        {
+                        end->link = new StackFrame<T>;
+                        end = end->link;
+                        end->data = temp->data;
+                        temp = temp->link;
+                        }
+                    end->link = nullptr; 
+                    }          
+            return *this; // dereferences &a_stack
+        }
+        catch(bad_alloc) {
+            cout<<"Bad memory allocation\n";
+            exit(1);
+        }
     }
 
 

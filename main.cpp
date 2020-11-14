@@ -136,7 +136,7 @@ int main()
     int menu = -1;
 
     while(!(menu == 0)) {
-        cout<<"\n\n 0-Exit code \n 1-Palindrome \n 2-Double stuff\n 3-Int stuff \n";
+        cout<<"\n\n 0-Exit code \n 1-Palindrome \n 2-Double Stack\n 3-Int Stack \n";
         cin>>menu;
 
 
